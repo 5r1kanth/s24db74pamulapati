@@ -1,0 +1,28 @@
+{
+  "name": "s24wb74pamulapati",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "cookie-parser": "~1.4.4",
+    "debug": "^4.3.4",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "http-errors": "^2.0.0",
+    "mongodb": "^6.5.0",
+    "mongoose": "^8.2.4",
+    "morgan": "^1.10.0",
+    "pug": "^3.0.2"
+  },
+  "description": "Assignment 10 - MVC & Pug",
+  "main": "app.js",
+  "keywords": [
+    "MVC",
+    "&",
+    "Pug"
+  ],
+  "author": "Srikanth Pamulapati - S560174\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[S\u001b[C\u001b[C\u001b[D\u001b[S\u001b[C",
+  "license": "ISC"
+}

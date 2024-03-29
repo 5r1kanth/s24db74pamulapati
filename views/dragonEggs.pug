@@ -1,0 +1,22 @@
+extends layout
+
+block content
+  h1= title
+  
+  -
+  .container-fluid
+  .row
+    - let results = [{ size: 1, color: 'Green', rarity: 'Common' },{ size: 2, color: 'Red', rarity: 'Rare' },{ size: 3, color: 'Blue', rarity: 'Legendary' }]
+    each result, index in results
+      .col-sm-2
+        div
+          .card(onclick=`buy(${index})`)
+            .card-body
+              p Size: #{result.size}
+              p Color: #{result.color}
+              p Rarity: #{result.rarity}
+  
+  script.
+    function buy(index) {
+      alert(`You purchased item ${index}`);
+    }
