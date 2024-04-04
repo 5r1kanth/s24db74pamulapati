@@ -30,7 +30,7 @@ exports.dragonEggs_list = async function (req, res) {
         res.status(500);
         res.send(`{"error": ${err}}`);
     }
-};
+};;
 
 // VIEWS
 // Handle a show all view
@@ -66,4 +66,16 @@ exports.dragonEggs_create_post = async function (req, res) {
     }
 };
 
+//Assignment 12
+// for a specific dragonEggs.
+exports.dragonEggs_detail = async function(req, res) {
+    console.log("detail" + req.params.id)
+    try {
+    result = await dragonEggs.findById( req.params.id)
+    res.send(result)
+    } catch (error) {
+    res.status(500)
+    res.send(`{"error": document for id ${req.params.id} not found`);
+    }
+   };
 
