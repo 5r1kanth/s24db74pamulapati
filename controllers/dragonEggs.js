@@ -113,3 +113,61 @@ exports.dragonEggs_delete = async function (req, res) {
     }
 };
 
+// Handle a show one view with id specified by query
+exports.dragonEggs_view_one_Page = async function (req, res) {
+    console.log("single view for id " + req.query.id)
+    try {
+        result = await dragonEggs.findById(req.query.id)
+        res.render('dragonEggsdetail',
+            { title: 'dragonEggs Detail', toShow: result });
+    }
+    catch (err) {
+        res.status(500)
+        res.send(`{'error': '${err}'}`);
+    }
+};
+
+// Handle building the view for creating a dragonEggs.
+// No body, no in path parameter, no query.
+// Does not need to be async
+exports.dragonEggs_create_Page = function (req, res) {
+    console.log("create view")
+    try {
+        res.render('dragonEggscreate', { title: 'dragonEggs Create' });
+    }
+    catch (err) {
+        res.status(500)
+        res.send(`{'error': '${err}'}`);
+    }
+};
+
+// Handle building the view for updating a dragonEggs.
+// query provides the id
+exports.dragonEggs_update_Page = async function (req, res) {
+    console.log("update view for item " + req.query.id)
+    try {
+        let result = await dragonEggs.findById(req.query.id)
+        res.render('dragonEggsupdate', { title: 'dragonEggs Update', toShow: result });
+    }
+    catch (err) {
+        res.status(500)
+        res.send(`{'error': '${err}'}`);
+    }
+};
+
+// Handle a delete one view with id from query
+exports.dragonEggs_delete_Page = async function (req, res) {
+    console.log("Delete view for id " + req.query.id)
+    try {
+        result = await dragonEggs.findById(req.query.id)
+        res.render('dragonEggsdelete', {
+            title: 'dragonEggs Delete', toShow:
+                result
+        });
+    }
+    catch (err) {
+        res.status(500)
+        res.send(`{'error': '${err}'}`);
+    }
+};
+

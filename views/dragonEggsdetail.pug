@@ -1,0 +1,24 @@
+extends layout
+
+block content
+  h1= title
+  if (toShow == null)
+    h2 No instance to detail
+  else
+    - let dragonEggsid = toShow._id
+    - let dragonEggs_size = toShow.size
+    - let dragonEggscolor = toShow.color
+    - let dragonEggsrarity = toShow.rarity
+    div
+      div.row(style)
+      div(class='dragonEggsAttr mr-3') dragonEggs ID is:
+      div #{dragonEggsid}
+      div.row
+      div(class='dragonEggsAttr mr-3') dragonEggs size is:
+      div #{dragonEggs_size}
+      div.row
+      div(class='dragonEggsAttr mr-3') dragonEggs color is:
+      div #{dragonEggscolor}
+      div.row
+      div(class='dragonEggsAttr mr-3') dragonEggs rarity is:
+      div #{dragonEggsrarity}

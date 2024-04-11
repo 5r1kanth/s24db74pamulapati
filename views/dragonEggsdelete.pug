@@ -1,0 +1,55 @@
+extends layout
+ 
+block content
+  h1= title
+  if (toShow == null)
+    h2 No instance to delete
+  else
+    - let dragonEggsid = toShow._id
+    - let size = toShow.size
+    - let color = toShow.color
+    - let rarity = toShow.rarity
+    - let actionid = "/resource/dragonEggs/" + dragonEggsid
+ 
+    script.
+      let actionid = "#{actionid}"
+   
+    div
+      div.row
+        div(class='dragonEggsAttr mr-3') dragonEggs ID is:
+        div #{watercraftid}
+      div.row
+        div(class='dragonEggsAttr mr-3') size is:
+        div #{size}
+      div.row
+        div(class='dragonEggsAttr mr-3') color is:
+        div #{color}
+      div.row
+        div(class='dragonEggstAttr mr-3') rarity is:
+        div #{rarity}
+   
+    button(class="btn btn-danger m-2", onclick="deleteOnid()") Delete
+    button(class="btn btn-secondary m-2", onclick="cancel()") Cancel
+ 
+    script.
+      function cancel() {
+        // Go back to the home page for the watercraft collection
+        window.location.href='/dragonEggs'
+      }
+    script.
+      function deleteOnid() {
+        console.log("starting delete")
+        // delete first
+        fetch(actionid, {
+          method: 'DELETE' // Don't need a body for the delete
+        }).then((resp) => {
+          return resp.json(); // or resp.text() or whatever the server sends
+        }).then((body) => {
+          alert("Delete succeeded")
+          window.location.href='/dragonEggs'
+          // TODO handle body
+        }).catch((error) => {
+          // TODO handle error
+          alert("Delete failed " + error )
+        });
+      }

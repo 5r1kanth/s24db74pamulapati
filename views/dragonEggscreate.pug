@@ -1,0 +1,32 @@
+extends layout
+block content
+  h1= title
+  
+  form(id='dragonEggsForm', action="/resource/dragonEggss", method="POST")
+    div.form-group
+     label.dragonEggsAttr(for='dragonEggs_size') dragonEggs size
+     input#dragonEggs_size(type='number', name='dragonEggs_size')
+    div.form-group
+      label.dragonEggsAttr(for='color') dragonEggs color
+      input#color(type='text', name='color')
+    div.form-group
+      label.dragonEggsAttr(for='rarity') dragonEggs rarity
+      input#rarity(type='text', name='rarity')
+    input(type="submit")
+  script.
+    document.forms['dragonEggsForm'].addEventListener('submit', (event) => {
+      event.preventDefault();
+        // TODO do something here to show user that form is being submitted
+      fetch(event.target.action, {
+        method: 'POST',
+        body: new URLSearchParams(new FormData(event.target)) // event.target is the form
+      }).then((resp) => {
+        return resp.text(); //resp.json(); or whatever the server sends
+      }).then((body) => {
+        alert("Save succeded")
+        // TODO handle body
+      }).catch((error) => {
+        // TODO handle error
+        alert("Save failed " + error )
+      });
+    });
