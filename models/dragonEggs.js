@@ -4,5 +4,5 @@ size: Number,
 color: String,
 rarity: String
 })
-module.exports = mongoose.model("DragonEgg", 
+module.exports = mongoose.model("dragonEggs", 
 dragonEggSchema)

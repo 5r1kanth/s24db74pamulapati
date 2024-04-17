@@ -1,20 +1,20 @@
 var dragonEggs = require('../models/dragonEggs');
 // List of all dragonEggss
-exports.dragonEggs_list = function (req, res) {
-    res.send('NOT IMPLEMENTED: dragonEggs list');
-};
+// exports.dragonEggs_list = function (req, res) {
+//     res.send('NOT IMPLEMENTED: dragonEggs list');
+// };
 // for a specific dragonEggs.
-exports.dragonEggs_detail = function (req, res) {
-    res.send('NOT IMPLEMENTED: dragonEggs detail: ' + req.params.id);
-};
+// exports.dragonEggs_detail = function (req, res) {
+//     res.send('NOT IMPLEMENTED: dragonEggs detail: ' + req.params.id);
+// };
 // Handle dragonEggs create on POST.
 // exports.dragonEggs_create_post = function (req, res) {
 //     res.send('NOT IMPLEMENTED: dragonEggs create POST');
 // };
 // Handle dragonEggs delete from on DELETE.
-exports.dragonEggs_delete = function (req, res) {
-    res.send('NOT IMPLEMENTED: dragonEggs delete DELETE ' + req.params.id);
-};
+// exports.dragonEggs_delete = function (req, res) {
+//     res.send('NOT IMPLEMENTED: dragonEggs delete DELETE ' + req.params.id);
+// };
 // Handle dragonEggs update form on PUT.
 // exports.dragonEggs_update_put = function (req, res) {
 //     res.send('NOT IMPLEMENTED: dragonEggs update PUT' + req.params.id);
@@ -23,8 +23,8 @@ exports.dragonEggs_delete = function (req, res) {
 // List of all dragonEggss
 exports.dragonEggs_list = async function (req, res) {
     try {
-        thedragonEggs = await dragonEggs.find();
-        res.send(thedragonEggs);
+        dragon = await dragonEggs.find();
+        res.send(dragon);
     }
     catch (err) {
         res.status(500);
@@ -36,8 +36,8 @@ exports.dragonEggs_list = async function (req, res) {
 // Handle a show all view
 exports.dragonEggs_view_all_Page = async function (req, res) {
     try {
-        thedragonEggss = await dragonEggs.find();
-        res.render('dragonEggs', { title: 'DragonEggs Search Results', results: thedragonEggs });
+        dragon = await dragonEggs.find();
+        res.render('dragonEggs', { title: 'DragonEggs Search Results', results: dragon });
     }
     catch (err) {
         res.status(500);
@@ -52,13 +52,13 @@ exports.dragonEggs_create_post = async function (req, res) {
     // We are looking for a body, since POST does not have query parameters.
     // Even though bodies can be in many different formats, we will be picky
     // and require that it be a json object
-    // {"dragonEggs_type":"goat", "cost":12, "size":"large"}
-    document.dragonEggs_type = req.body.dragonEggs_type;
-    document.cost = req.body.cost;
+    // {"dragonEggs_type":"goat", "color":12, "rarity":"large"}
     document.size = req.body.size;
+    document.color = req.body.color;
+    document.rarity = req.body.rarity;
     try {
-        let result = await document.save();
-        res.send(result);
+        let results = await document.save();
+        res.send(results);
     }
     catch (err) {
         res.status(500);
@@ -71,8 +71,8 @@ exports.dragonEggs_create_post = async function (req, res) {
 exports.dragonEggs_detail = async function (req, res) {
     console.log("detail" + req.params.id)
     try {
-        result = await dragonEggs.findById(req.params.id)
-        res.send(result)
+        results = await dragonEggs.findById(req.params.id)
+        res.send(results)
     } catch (error) {
         res.status(500)
         res.send(`{"error": document for id ${req.params.id} not found`);
@@ -104,9 +104,9 @@ failed`);
 exports.dragonEggs_delete = async function (req, res) {
     console.log("delete " + req.params.id)
     try {
-        result = await dragonEggs.findByIdAndDelete(req.params.id)
-        console.log("Removed " + result)
-        res.send(result)
+        results = await dragonEggs.findByIdAndDelete(req.params.id)
+        console.log("Removed " + results)
+        res.send(results)
     } catch (err) {
         res.status(500)
         res.send(`{"error": Error deleting ${err}}`);
@@ -117,9 +117,9 @@ exports.dragonEggs_delete = async function (req, res) {
 exports.dragonEggs_view_one_Page = async function (req, res) {
     console.log("single view for id " + req.query.id)
     try {
-        result = await dragonEggs.findById(req.query.id)
+        results = await dragonEggs.findById(req.query.id)
         res.render('dragonEggsdetail',
-            { title: 'dragonEggs Detail', toShow: result });
+            { title: 'dragonEggs Detail', toShow: results });
     }
     catch (err) {
         res.status(500)
@@ -146,8 +146,8 @@ exports.dragonEggs_create_Page = function (req, res) {
 exports.dragonEggs_update_Page = async function (req, res) {
     console.log("update view for item " + req.query.id)
     try {
-        let result = await dragonEggs.findById(req.query.id)
-        res.render('dragonEggsupdate', { title: 'dragonEggs Update', toShow: result });
+        let results = await dragonEggs.findById(req.query.id)
+        res.render('dragonEggsupdate', { title: 'dragonEggs Update', toShow: results });
     }
     catch (err) {
         res.status(500)
