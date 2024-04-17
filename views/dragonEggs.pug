@@ -7,10 +7,17 @@ block content
   .container-fluid
   .row
     - let values = results
+    - let destination = `dispatch("/dragonEggs/create")`
+      button.btn(class="btn-primary ml-1", onclick= destination) Create New Tools item
+    //- div(class="container-fluid")
     each value, index in values
-      - let destination = `dispatch(\"/dragonEggs/update/?id=${value._id}\")`
+      - let destinationUpdate = `dispatch(\"/dragonEggs/update/?id=${value._id}\")`
+      - let destinationDetail = `dispatch(\"/dragonEggs/detail/?id=${value._id}\")`
+      - let destinationDelete = `dispatch(\"/dragonEggs/delete/?id=${value._id}\")`
       div(class="row-sm-2", class="m-1") value #{value.size}(#{value.color}) is #{value.rarity}
-        button.btn( class="btn-primary ml-1", onclick= destination) Update
+        button.btn( class="btn-primary ml-1", onclick= destinationUpdate style='margin-left: 4px; background-color: green') Update
+        button.btn( class="btn-primary ml-1", onclick= destinationDetail style='margin-left: 4px; background-color: green') Details
+        button.btn( class="btn-primary ml-1", onclick= destinationDelete style='margin-left: 4px; background-color: green') Delete
       .col-sm-2
         div
           .card(onclick=`buy(${index})`)

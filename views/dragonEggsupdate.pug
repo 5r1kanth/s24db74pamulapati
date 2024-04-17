@@ -26,17 +26,21 @@ block content
     script.
       document.forms['dragonEggsForm'].addEventListener('submit', (event) => {
         event.preventDefault();
-        // TODO do something here to show user that form is being submitted
         fetch(event.target.action, {
           method: 'PUT',
-          body: new URLSearchParams(new FormData(event.target)) // event.target is the form
+          body: new URLSearchParams(new FormData(event.target))
         }).then((resp) => {
+          if(resp.ok){
+            alert ("dragonEggs Updated Successfully")
+            document.getElementById('dragonEggsForm').reset()
+        }
+        else {
+            alert (" Failed to Update dragonEggs")
+        }
           return resp.text(); //resp.json();or whatever the server sends
         }).then((body) => {
-          alert("Update succeeded");
-          // TODO handle body
+        //  alert("Update succeeded");
         }).catch((error) => {
-          // TODO handle error
           alert("Update failed: " + error);
         });
       });
